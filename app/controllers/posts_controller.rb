@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
-
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    # Remove instance variable, opting to call the actual index.rb file directly
+    # @posts = Post.all
+    render TwitterClone::Pages::Posts::Index
   end
 
   # POST /posts or /posts.json
