@@ -1,24 +1,4 @@
-# README
+# Matestack UI Tutorial project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Working through the tutorial found in the Getting Started guide. The ability to build a front UI experience in Ruby was first introduced to me at RailsConf2021 and this was one of the interesting talks offered.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
