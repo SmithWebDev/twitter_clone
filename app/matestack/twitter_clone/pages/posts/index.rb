@@ -20,11 +20,22 @@ class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
           form_input key: :username, type: :text, placeholder: 'Username', class: 'form-control'
         end
         div class: 'mb-3' do
-          form_textarea key: :body,placeholder: "What's up?", class: 'form-control'
+          form_textarea key: :body, placeholder: "What's up?", class: 'form-control'
         end
         div class: 'mb-3' do
           button 'submit', type: :submit, class: 'btn btn-primary', text: 'Post!'
         end
+      end
+    end
+
+    toggle show_on: 'submitted', hide_after: 5000 do
+      div class: 'container fixed-bottom w-100 bg-success text-white p-3 rounded-top' do
+        heading size: 4, text: 'Success: {{ event.data.message }}'
+      end
+    end
+    toggle show_on: 'form_failed', hide_after: 5000 do
+      div class: 'container fixed-bottom w-100 bg-danger text-white p-3 rounded-top' do
+        heading size: 4, text: 'Error: {{ event.data.message }}'
       end
     end
   end
@@ -32,11 +43,9 @@ class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
   def form_config_helper
     {
       for: Post.new, path: posts_path, method: :post,
-      errors: {
-        wrapper: { tag: :div, class: 'invalid-feedback' },
-        input: { class: 'is-invalid' }
-      },
-      success: { emit: 'submitted' }
+      success: { emit: 'submitted' },
+      failure: { emit: 'form_failed' },
+      errors: { wrapper: { tag: :div, class: 'invalid-feedback' }, input: { class: 'is-invalid' } }
     }
   end
 
