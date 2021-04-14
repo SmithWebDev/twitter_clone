@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  matestack_app TwitterClone::App
   # GET /posts or /posts.json
   def index
     # Remove instance variable, opting to call the actual index.rb file directly
@@ -15,7 +16,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

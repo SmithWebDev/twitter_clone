@@ -7,7 +7,8 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
     "matestack-ui-core": "^2.0.0",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "vue": "^2.6.12"
   },
   "version": "0.1.0",
   "devDependencies": {
