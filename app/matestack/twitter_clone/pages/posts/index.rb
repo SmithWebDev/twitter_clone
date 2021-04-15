@@ -52,25 +52,26 @@ class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
   def post_list_partial
     async rerender_on: 'cable__created_post', id: 'post-listed' do
       @posts.each do |post|
-        post_partial(post)
+        #post_partial(post)
+        Components::Post.(post: post)
       end
     end
   end
 
-  def post_partial(post)
-    async rerender_on: "cable__liked_post_#{post.id}", id: "post-#{post.id}" do
-      div class: 'mb-3 p-3 rounded shadow-sm' do
-        heading size: 5 do
-          plain post.username
-          small text: post.created_at.strftime('%d.%m.%Y %H:%M')
-        end
-        paragraph text: post.body, class: 'mb-5'
-        action path: like_post_path(post), method: :put do
-          button class: 'btn btn-light' do
-            plain "like (#{post.likes_count})"
-          end
-        end
-      end
-    end
-  end
+  #def post_partial(post)
+  #  async rerender_on: "cable__liked_post_#{post.id}", id: "post-#{post.id}" do
+  #    div class: 'mb-3 p-3 rounded shadow-sm' do
+  #      heading size: 5 do
+  #        plain post.username
+  #        small text: post.created_at.strftime('%d.%m.%Y %H:%M')
+  #      end
+  #      paragraph text: post.body, class: 'mb-5'
+  #      action path: like_post_path(post), method: :put do
+  #        button class: 'btn btn-light' do
+  #          plain "like (#{post.likes_count})"
+  #        end
+  #      end
+  #    end
+  #  end
+  #end
 end
