@@ -11,8 +11,8 @@ class PostsController < ApplicationController
 
     if @post.save
       ActionCable.server.broadcast('matestack_ui_core', {
-        event: "cable__liked_post_#{@post.id}"
-      })
+                                     event: "cable__liked_post_#{@post.id}"
+                                   })
       render json: {
         message: 'Post was successfully liked.'
       }, status: :created
@@ -27,10 +27,12 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-      ActionCable.server.broadcast('matestack_ui_core', {
-        event: 'cable__created_post'
-      })
     if @post.save
+      ActionCable.server.broadcast('matestack_ui_core', {
+                                     event: 'cable__created_post',
+                                     # data: Components::Post.call(post: @post)
+                                     data: post_component(post: @post)
+                                   })
       render json: {
         message: 'Post was successfully created.'
       }, status: :created

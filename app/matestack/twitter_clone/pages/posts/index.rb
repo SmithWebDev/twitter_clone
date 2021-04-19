@@ -1,5 +1,4 @@
 class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
-
   include Components::Registry
 
   # Initial method to grab all posts
@@ -53,7 +52,7 @@ class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
   end
 
   def post_list_partial
-    async rerender_on: 'cable__created_post', id: 'post-listed' do
+    cable prepend_on: 'cable__created_post', id: 'post-list' do
       @posts.each do |post|
         # post_partial(post)
         # Components::Post.(post: post)
