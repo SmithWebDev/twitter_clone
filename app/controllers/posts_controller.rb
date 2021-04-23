@@ -11,7 +11,9 @@ class PostsController < ApplicationController
 
     if @post.save
       ActionCable.server.broadcast('matestack_ui_core', {
-                                     event: "cable__liked_post_#{@post.id}"
+                                     # event: "cable__liked_post_#{@post.id}",
+                                     event: 'cable__liked_post',
+                                     data: post_component(post: @post)
                                    })
       render json: {
         message: 'Post was successfully liked.'
@@ -30,7 +32,6 @@ class PostsController < ApplicationController
     if @post.save
       ActionCable.server.broadcast('matestack_ui_core', {
                                      event: 'cable__created_post',
-                                     # data: Components::Post.call(post: @post)
                                      data: post_component(post: @post)
                                    })
       render json: {
