@@ -1,18 +1,16 @@
 class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
   include Components::Registry
 
-  # Initial method to grab all posts
-  def prepare
-    @posts = Post.all
-  end
-
-  # Describes how to show the posts (using bootstrap classes)
   def response
     post_form_partial
     post_list_partial
   end
 
   private
+
+  def posts
+    Post.all
+  end
 
   def post_form_partial
     div class: 'mb-3 p-3 rounded shadow-sm' do
@@ -52,9 +50,11 @@ class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
   end
 
   def post_list_partial
-    cable prepend_on: 'cable__created_post', update_on: 'cable__liked_post', id: 'post-list' do
-      @posts.each do |post|
-        post_component post: post
+    async defer: true, id: 'deferred-post-list' do
+      cable prepend_on: 'cable__created_post', update_on: 'cable__liked_post', id: 'post-list' do
+        posts.each do |post|
+          post_component post: post
+        end
       end
     end
   end
