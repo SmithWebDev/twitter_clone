@@ -10,6 +10,7 @@ import Vue from 'vue/dist/vue.esm'
 import Vuex from 'vuex'
 
 import MatestackUiCore from 'matestack-ui-core'
+import './stylesheets/application.scss';
 
 let matestachUiApp = undefined
 

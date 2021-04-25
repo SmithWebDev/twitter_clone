@@ -1,0 +1,8 @@
+.matestack-async-component-container{
+  opacity: 1;
+  transition: opacity 3.2s ease-in-out;
+
+  &.loading{
+    opacity: 0;
+  }
+}
