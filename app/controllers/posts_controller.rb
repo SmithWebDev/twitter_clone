@@ -11,7 +11,6 @@ class PostsController < ApplicationController
 
     if @post.save
       ActionCable.server.broadcast('matestack_ui_core', {
-                                     # event: "cable__liked_post_#{@post.id}",
                                      event: 'cable__liked_post',
                                      data: post_component(post: @post)
                                    })
@@ -29,7 +28,13 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-    if @post.save
+    @post.username = cookies[:username]
+
+    if cookies[:username].blank?
+      render json: {
+        message: 'No username given!'
+      }, status: :unprocessable_entity
+    elsif @post.save
       ActionCable.server.broadcast('matestack_ui_core', {
                                      event: 'cable__created_post',
                                      data: post_component(post: @post)
@@ -47,7 +52,6 @@ class PostsController < ApplicationController
 
   private
 
-  # Only allow a list of trusted parameters through.
   def post_params
     params.require(:post).permit(:body, :username)
   end

@@ -6,3 +6,14 @@
     opacity: 0;
   }
 }
+
+.matestack-page-container {
+  .matestack-page-wrapper {
+    opacity: 1;
+    transition: opacity 3.2s ease-in-out;
+
+    &.loading {
+      opacity: 0;
+    }
+  }
+}

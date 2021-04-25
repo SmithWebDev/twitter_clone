@@ -16,9 +16,9 @@ class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
     div class: 'mb-3 p-3 rounded shadow-sm' do
       heading size: 4, text: 'New Post', class: 'mb-3'
       matestack_form form_config_helper do
-        div class: 'mb-3' do
-          form_input key: :username, type: :text, placeholder: 'Username', class: 'form-control'
-        end
+        # div class: 'mb-3' do
+        #   form_input key: :username, type: :text, placeholder: 'Username', class: 'form-control'
+        # end
         div class: 'mb-3' do
           form_textarea key: :body, placeholder: "What's up?", class: 'form-control'
         end
@@ -28,16 +28,16 @@ class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
       end
     end
 
-    toggle show_on: 'submitted', hide_after: 5000 do
-      div class: 'container fixed-bottom w-100 bg-success text-white p-3 rounded-top' do
-        heading size: 4, text: 'Success: {{ event.data.message }}'
-      end
-    end
-    toggle show_on: 'form_failed', hide_after: 5000 do
-      div class: 'container fixed-bottom w-100 bg-danger text-white p-3 rounded-top' do
-        heading size: 4, text: 'Error: {{ event.data.message }}'
-      end
-    end
+    # toggle show_on: 'submitted', hide_after: 5000 do
+    #   div class: 'container fixed-bottom w-100 bg-success text-white p-3 rounded-top' do
+    #     heading size: 4, text: 'Success: {{ event.data.message }}'
+    #   end
+    # end
+    # toggle show_on: 'form_failed', hide_after: 5000 do
+    #   div class: 'container fixed-bottom w-100 bg-danger text-white p-3 rounded-top' do
+    #     heading size: 4, text: 'Error: {{ event.data.message }}'
+    #   end
+    # end
   end
 
   def form_config_helper
