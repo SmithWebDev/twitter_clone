@@ -51,7 +51,7 @@ class TwitterClone::Pages::Posts::Index < Matestack::Ui::Page
 
   def post_list_partial
     async defer: 1000, id: 'deferred-post-list' do
-      cable prepend_on: 'cable__created_post', update_on: 'cable__liked_post', id: 'post-list' do
+      cable prepend_on: 'cable__created_post', update_on: 'cable__liked_post, cable__updated_post', id: 'post-list' do
         posts.each do |post|
           post_component post: post
         end
